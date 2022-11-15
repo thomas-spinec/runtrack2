@@ -10,15 +10,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jour 2 job02</title>
+    <title>jour 2 job03</title>
 </head>
 <body>
-    <h1>jour 2 job02</h1>
+    <h1>jour 2 job03</h1>
     <br>
     <p><?php 
-        for($i=0; $i<=1337; $i++){
-            if($i === 26 OR $i === 37 OR $i === 88 OR $i === 1111 OR $i === 3233){ //en l'occurence on arrivera jamais à 3233
-                echo "<br>"; //n'affiche pas les nombres au dessus
+        for($i=0; $i<=100; $i++){
+            if($i <=20){ //jusqu'à 20
+                echo "<i>$i</i>"; //affichage en italique
+                echo "<br>";
+            }
+            else if($i===42){
+                echo "La Plateforme_"; //affichage à la place de 42
+                echo "<br>";
+            }
+            else if($i>=25 && $i<=50){
+                echo "<u>$i</u>";  //affichage souligné
+                echo "<br>";
             }
             else{
                 echo $i;  //affichage des autres chiffres et nombres normalement
