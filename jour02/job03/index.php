@@ -18,20 +18,16 @@
     <p><?php 
         for($i=0; $i<=100; $i++){
             if($i <=20){ //jusqu'à 20
-                echo "<i>$i</i>"; //affichage en italique
-                echo "<br>";
+                echo "<i>$i</i><br>"; //affichage en italique
             }
             else if($i===42){
-                echo "La Plateforme_"; //affichage à la place de 42
-                echo "<br>";
+                echo "La Plateforme_<br>"; //affichage à la place de 42
             }
             else if($i>=25 && $i<=50){
-                echo "<u>$i</u>";  //affichage souligné
-                echo "<br>";
+                echo "<u>$i</u><br>";  //affichage souligné
             }
             else{
-                echo $i;  //affichage des autres chiffres et nombres normalement
-                echo "<br>";
+                echo "$i<br>";  //affichage des autres chiffres et nombres normalement
             }
         }
     ?></p>

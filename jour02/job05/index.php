@@ -22,8 +22,7 @@
                     break;
                 }
                 else if($x === $i-1){ // si on est arrivé jusqu'à i-1 sans déclencher la conditions précédente, c'est un nombre premier
-                    echo $i;
-                    echo "<br>";
+                    echo "$i<br>";
                 }
             }
         }

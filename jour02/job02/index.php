@@ -21,8 +21,7 @@
                 echo "<br>"; //n'affiche pas les nombres au dessus
             }
             else{
-                echo $i;  //affichage des autres chiffres et nombres normalement
-                echo "<br>";
+                echo "$i<br>";  //affichage des autres chiffres et nombres normalement
             }
         }
     ?></p>
