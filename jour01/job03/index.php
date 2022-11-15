@@ -28,25 +28,25 @@ $float = 4.4;
         </tr>
 
         <tr>
-            <td>chaîne de caractères</td>
+            <td><?php echo gettype($str) ?></td>
             <td>str</td>
             <td><?php echo $str; ?></td>
         </tr>
 
         <tr>
-            <td>entier</td>
+            <td><?php echo gettype($integer) ?></td>
             <td>integer</td>
             <td><?php echo $integer; ?></td>
         </tr>
 
         <tr>
-            <td>booléen</td>
+            <td><?php echo gettype($myBool) ?></td>
             <td>myBool</td>
             <td><?php echo $myBool; ?></td> 
         </tr>
 
         <tr>
-            <td>nombre à virgule flottante</td>
+            <td><?php echo gettype($float) ?></td>
             <td>float</td>
             <td><?php echo $float; ?></td>
         </tr>
