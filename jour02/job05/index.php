@@ -17,19 +17,13 @@
     <br>
     <p><?php 
         for($i=1; $i<=1000; $i++){
-            if ($i < 3){ //affiche 1 et 2 car sont des nombres premiers
-                echo $i;
-                echo "<br>";
-            }
-            else{
-                for($x=2; $x<$i; $x++){
-                    if ($i % $x === 0){ // si le modulo de i par rapport à n'importe quel chiffre au dessous = 0 on passe au prochain x
-                        break;
-                    }
-                    else if($x === $i-1){ // si on est arrivé jusqu'à i-1 sans déclencher la conditions précédente, c'est un nombre premier
-                        echo $i;
-                        echo "<br>";
-                    }
+            for($x=2; $x<$i; $x++){
+                if ($i % $x === 0){ // si le modulo de i par rapport à n'importe quel chiffre au dessous = 0 on passe au prochain i
+                    break;
+                }
+                else if($x === $i-1){ // si on est arrivé jusqu'à i-1 sans déclencher la conditions précédente, c'est un nombre premier
+                    echo $i;
+                    echo "<br>";
                 }
             }
         }
