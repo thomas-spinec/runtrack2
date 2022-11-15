@@ -18,11 +18,11 @@
     <p><?php 
         for($i=1; $i<1337; $i++){
             if($i === 42){
-                echo "<b><u>$i</u></b>";
+                echo "<b><u>$i</u></b>"; //affichage du 42 en gras et souligné
                 echo "<br>";
             }
             else{
-                echo $i;
+                echo $i;  //affichage des autres chiffres et nombres normalement
                 echo "<br>";
             }
         }
