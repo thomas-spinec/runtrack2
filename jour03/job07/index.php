@@ -26,9 +26,17 @@
                 echo $str[0];
             }
             else{
-                echo $str[$i+1];
+                echo $str[$i+1]; //affichage tous les caractères sauf le premier (qui devient le dernier)
             }
         }
+    ?></p>
+    <br>
+    <h2>Deuxième méthode (simplifiée)</h2>
+    <p><?php
+        for ($i=0; $i<=$caract; $i++){ // boucle permettant de remplacer le caractère par le suivant
+            echo $str[$i+1]; //affichage tous les caractères sauf le premier (qui devient le dernier)
+        }
+        echo $str[0]; //affichage du premier en dernier
     ?></p>
 </body>
 </html>

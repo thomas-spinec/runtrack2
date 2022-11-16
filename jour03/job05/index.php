@@ -3,12 +3,18 @@
     $str = "On n'est pas le meilleur quand on le croit mais quand on le sait.";
     $voy = ["a", "e", "i", "o", "u", "y"];
     $maj = ["A", "E", "I", "O", "U", "Y"];
-    $nb_voy = 0;
-    $nb_cons = 0;
+    $voy2 = ["a", "e", "i", "o", "u", "y", "A", "E", "I", "O", "U", "Y"];
+    $cons = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z"];
     $dic = [
         "voyelles" => 0,
         "consonnes" => 0
     ];
+    $dic2 = [
+        "voyelles" => $voy2,
+        "consonnes" => $cons
+    ];
+    $nb_voy = 0;
+    $nb_cons = 0;
 ?>
 
 <!-- Partie HTML -->
@@ -23,8 +29,12 @@
 <body>
     <h1>jour 3 job05</h1>
     <br>
-    <p><?php 
+    <?php
         echo "<b>$str</b><br><br>";
+    ?>
+    <br>
+    <h2>Avec un tableau pour les voyelles seulement</h2>
+    <p><?php
         for($i=0; isset($str[$i]); $i++){
             for($j=0; $j<6; $j++){
                 if($str[$i] === $voy[$j] OR $str[$i] === $maj[$j]){  // cherche dans les voyelles en majuscule et en minuscule
@@ -45,6 +55,39 @@
         <tr>
             <td><?php echo $dic["consonnes"] ?></td>
             <td><?php echo $dic["voyelles"] ?></td>
+        </tr>
+    </table>
+    <br>
+    <h2>Avec un tableau multidimensionnel</h2>
+    <br>
+    <p><?php
+        for ($i=0; isset($str[$i]); $i++){
+            foreach($dic2 as $type => $letters){
+                if ($type === "voyelles"){
+                    for($j=0; $j<12; $j++){
+                        if($str[$i] === $letters[$j]){
+                            $nb_voy++;
+                        }
+                    }
+                }
+                else if ($type === "consonnes"){
+                    for($j=0; $j<42; $j++){
+                        if($str[$i] === $letters[$j]){
+                            $nb_cons++;
+                        }
+                    }
+                }
+            }
+        }
+    ?></p>
+     <table border : 1px> <!-- Affichage du Tableau -->
+        <tr>
+            <th>Consonnes</th>
+            <th>Voyelles</th>
+        </tr>
+        <tr>
+            <td><?php echo $nb_cons ?></td>
+            <td><?php echo $nb_voy ?></td>
         </tr>
     </table>
 </body>
