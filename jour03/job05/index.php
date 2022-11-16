@@ -37,7 +37,7 @@
             }
         }
     ?></p>
-    <table> <!-- Affichage du Tableau -->
+    <table border : 1px> <!-- Affichage du Tableau -->
         <tr>
             <th>Consonnes</th>
             <th>Voyelles</th>
