@@ -19,7 +19,7 @@ $count = 0;
         var_dump($_POST);
         echo '<br>';
     ?>
-    <h3>Voici le formulaire :</h3>
+    <h3>Voici le formulaire (méthode post):</h3>
     <br>
 
     <form action="" method="post">
