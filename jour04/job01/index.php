@@ -1,6 +1,6 @@
 <!-- Partie PHP -->
 <?php
-
+$count = 0;
 ?>
 
 <!-- Partie HTML -->
@@ -15,8 +15,44 @@
 <body>
     <h1>jour 4 job01</h1>
     <br>
+    <?php
+        var_dump($_GET);
+        echo '<br>';
+    ?>
+    <h3>Voici le formulaire :</h3>
+    <br>
+
+    <form action="" method="get">
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" id="nom">
+        <br>
+        <br>
+        <label for="prenom">Prénom :</label>
+        <input type="text" name="prenom" id="prenom">
+        <br>
+        <br>
+        <label for="age">Age :</label>
+        <input type="text" name="age" id="age">
+        <br>
+        <br>
+        <label for="ville">Ville :</label>
+        <input type="text" name="ville" id="ville">
+        <br>
+        <br>
+        <input type="submit" value="Envoyer">
+    </form>
     <p><?php 
 
+        foreach($_GET as $args => $value){
+            $len=0;
+            for($i = 0; isset($value[$i]); $i++){
+                $len++;
+            }
+            if ($len>0){
+                $count++;
+            }
+        }
+        echo "le nombre d'argument GET envoyé est : ".$count;
     ?></p>
 </body>
 </html>
