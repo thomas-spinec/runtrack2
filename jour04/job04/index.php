@@ -15,10 +15,6 @@ $count = 0;
 <body>
     <h1>jour 4 job04</h1>
     <br>
-    <?php
-        var_dump($_POST);
-        echo '<br>';
-    ?>
     <h3>Voici le formulaire (méthode post):</h3>
     <br>
 

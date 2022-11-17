@@ -16,10 +16,6 @@ $Autre = "Votre pire cauchemar";
 <body>
     <h1>jour 4 job05</h1>
     <br>
-    <?php
-        var_dump($_POST);
-        echo '<br>';
-    ?>
     <h3>Voici le formulaire (méthode 'post'):</h3>
     <p>Méthode POST et pas GET pour éviter d'afficher le mot de passe en clair</p>
     <br>
@@ -36,7 +32,7 @@ $Autre = "Votre pire cauchemar";
         <input type="submit" value="Envoyer">
     </form>
     <p><?php 
-    
+
         if (isset($_POST['username']) && isset($_POST['password'])){
             if ($_POST['username'] == "John" && $_POST['password'] == "Rambo"){
                 echo $Rambo;
