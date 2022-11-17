@@ -10,19 +10,19 @@ $count = 0;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jour 4 job01</title>
+    <title>jour 4 job03</title>
 </head>
 <body>
-    <h1>jour 4 job01</h1>
+    <h1>jour 4 job03</h1>
     <br>
     <?php
-        var_dump($_GET);
+        var_dump($_POST);
         echo '<br>';
     ?>
-    <h3>Voici le formulaire :</h3>
+    <h3>Voici le formulaire (méthode 'post'):</h3>
     <br>
 
-    <form action="" method="get">
+    <form action="" method="post">
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom">
         <br>
@@ -43,7 +43,7 @@ $count = 0;
     </form>
     <p><?php 
 
-        foreach($_GET as $args => $value){
+        foreach($_POST as $args => $value){
             $len=0;
             for($i = 0; isset($value[$i]); $i++){
                 $len++;
@@ -52,7 +52,7 @@ $count = 0;
                 $count++;
             }
         }
-        echo "le nombre d'argument GET envoyé est : ".$count;
+        echo "le nombre d'argument POST envoyé est : ".$count;
     ?></p>
 </body>
 </html>
