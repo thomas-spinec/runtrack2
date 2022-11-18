@@ -39,7 +39,7 @@ $count = 0;
     </form>
     <p><?php 
 
-        foreach($_POST as $args => $value){
+        foreach($_POST as $args => $value){ // possibilité de réduire à une ligne avec juste un if
             $len=0;
             for($i = 0; isset($value[$i]); $i++){
                 $len++;

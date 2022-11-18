@@ -34,7 +34,7 @@ $Autre = "Votre pire cauchemar";
     <p><?php 
 
         if (isset($_POST['username']) && isset($_POST['password'])){
-            if ($_POST['username'] == "John" && $_POST['password'] == "Rambo"){
+            if ($_POST['username'] == "John" && $_POST['password'] == "Rambo"){ // vérification de la similitude avec ces info pour afficher une phrase particulière
                 echo $Rambo;
             } else {
                 echo $Autre;

@@ -1,7 +1,5 @@
 <!-- Partie PHP -->
 <?php
-$h1 = 0;
-$h2 = 0;
 $e = "&nbsp;"; // pour echo un espace
 $s = "_";
 ?>
@@ -44,7 +42,7 @@ $s = "_";
                 echo "<br>";
                 echo "<br>";
 
-                for ($h1 = 0; $h1 < $hauteur; $h1++){ // LE TOIT DE LA MAISON
+                for ($h1 = 0; $h1 < $largeur/2; $h1++){ // LE TOIT DE LA MAISON
                     for ($j = $largeur/2; $j > $h1; $j--){
                         echo $e;
                     }

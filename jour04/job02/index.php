@@ -1,6 +1,6 @@
 <!-- Partie PHP -->
 <?php
-$count = 0;
+  //pas utile dans ce job
 ?>
 
 <!-- Partie HTML -->

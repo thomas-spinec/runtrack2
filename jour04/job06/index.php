@@ -1,6 +1,6 @@
 <!-- Partie PHP -->
 <?php
-
+  // pas utile dans ce job
 ?>
 
 <!-- Partie HTML -->
@@ -29,7 +29,7 @@
     <br>
         <?php
             if (isset($_GET['nombre'])){
-                if ($_GET['nombre'] % 2 == 0){
+                if ($_GET['nombre'] % 2 == 0){  // Vérification si c'est un nombre pair
                     echo "Le nombre ".$_GET['nombre']." est pair";
                 }
                 else{
