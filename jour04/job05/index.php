@@ -26,7 +26,7 @@ $Autre = "Votre pire cauchemar";
         <br>
         <br>
         <label for="password">Password :</label>
-        <input type="text" name="password" id="password" require>
+        <input type="password" name="password" id="password" require>
         <br>
         <br>
         <input type="submit" value="Envoyer">
