@@ -55,7 +55,12 @@ $s = "_";
                     echo "<br>";
                 } 
                 for ($h2 = 0; $h2 < $hauteur; $h2++){ // LE RESTE DE LA MAISON
-                    echo "|";
+                    if ($h2 == 0){
+                        echo "T";
+                    }
+                    else{
+                        echo "|";
+                    }
                     if ($h2 == $hauteur-1){
                         for ($y = 0; $y < $largeur; $y++){
                             echo $s;
@@ -66,7 +71,12 @@ $s = "_";
                             echo $e;
                         }
                     }
-                    echo "|";
+                    if ($h2 == 0){
+                        echo "T";
+                    }
+                    else{
+                        echo "|";
+                    }
                     echo "<br>";
                 }
             }
