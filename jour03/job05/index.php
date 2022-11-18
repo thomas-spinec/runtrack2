@@ -64,14 +64,14 @@
         for ($i=0; isset($str[$i]); $i++){
             foreach($dic2 as $type => $letters){
                 if ($type === "voyelles"){
-                    for($j=0; $j<12; $j++){
+                    for($j=0; isset($letters[$j]); $j++){
                         if($str[$i] === $letters[$j]){
                             $nb_voy++;
                         }
                     }
                 }
                 else if ($type === "consonnes"){
-                    for($j=0; $j<42; $j++){
+                    for($j=0; isset($letters[$j]); $j++){
                         if($str[$i] === $letters[$j]){
                             $nb_cons++;
                         }
