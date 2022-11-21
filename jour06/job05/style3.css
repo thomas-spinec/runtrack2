@@ -1,0 +1,60 @@
+/* style alternatif */
+
+body {
+  background-color: #e7dfc6;
+  color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: auto;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+h3 {
+  text-align: center;
+  font-size: 30px;
+  font-style: italic;
+}
+
+body div {
+  width: 90%;
+  background-color: #998072;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+}
+
+/* style pour le formulaire */
+form {
+  width: 100%;
+  font-weight: bold;
+}
+
+#button {
+  color: #000000;
+  border-radius: 10px;
+  background-color: #e7dfc6;
+  transition: 0.5s;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#button:hover {
+  background-color: #b69a8a;
+  border-color: #e7dfc6;
+}
+
+form > select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #e7dfc6;
+}

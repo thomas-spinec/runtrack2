@@ -1,0 +1,38 @@
+/* style sombre */
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+}
+
+body div {
+  width: 90%;
+  background-color: #1a1a1a;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* style pour le formulaire */
+form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#button {
+  color: #ffffff;
+  border-radius: 10px;
+  background-color: #000000;
+  transition: 0.5s;
+}
+
+#button:hover {
+  background-color: #1a1a1a;
+  border-color: #000000;
+}
