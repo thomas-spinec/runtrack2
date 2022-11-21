@@ -39,8 +39,8 @@
             <select name="style" id="style-select">
                 <option value="">--Choisissez une option--</option>
                 <option value="style1">style1 (par défaut)</option>
-                <option value="style2">style2</option>
-                <option value="style3">style3</option>
+                <option value="style2">style2 (sombre)</option>
+                <option value="style3">style3 (alternatif)</option>
             </select>
             <br>
             <br>
