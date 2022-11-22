@@ -1,6 +1,6 @@
 <!-- Partie PHP -->
 <?php
-    $str = "Une phrase de tEst tout à fAit normale";
+    // $str = "Une phrase de tEst tout à fAit normale";
 
     function leetSpeak($str){ // transforme certaine lettre dans leur charactère 'leet speak'
         for ($i=0; isset($str[$i]); $i++) { 
@@ -48,11 +48,18 @@
     <h1>jour 7 job06</h1>
     <br>
     <br>
+    <form action="" method="get">
+        <input type="text" name="str" placeholder="Entrez une phrase">
+        <input type="submit" value="Encodez">
+    </form>
     <?php
-        echo "La phrase est : <br>";
-        echo $str . "<br>";
-        echo "La phrase convertie en leet speak devient : <br>";
-        echo leetSpeak($str);
+        if (isset($_GET["str"])) {
+            $str = $_GET["str"];
+            echo "La phrase est : <br>";
+            echo $str . "<br><br>";
+            echo "La phrase convertie en leet speak devient : <br>";
+            echo leetSpeak($str);
+        }
     ?>
 
 </body>

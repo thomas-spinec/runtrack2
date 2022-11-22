@@ -1,8 +1,8 @@
 <!-- Partie PHP -->
 <?php
-    $a = 5;
-    $b = 3;
-    $operation = "+";
+    // $a = 5;
+    // $b = 3;
+    // $operation = "+";
 
     function calcul($a, $operation, $b){
         if ($operation === "+") {
@@ -41,13 +41,35 @@
     <h1>jour 7 job04</h1>
     <br>
     <br>
+    <form action="" method="get">
+        <input type="number" name="a" id="a" value="">
+        <select name="operation" id="operation">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="number" name="b" id="b" value="">
+        <input type="submit" value="=">
+        <input type="number" name="result" id="result" value="<?php 
+        if (isset($_GET["a"]) && isset($_GET["b"]) && isset($_GET["operation"])) {
+        $a = $_GET["a"];
+        $b = $_GET["b"];
+        $operation = $_GET["operation"];
+        echo calcul($a, $operation, $b);
+    } 
+    ?>">
+    </form>
+    <br>
+    <br>
     <?php
-        echo "Le premier nombre est $a <br>";
-        echo "Le deuxième nombre est $b <br>";
-        echo "L'opération est $operation <br>";
-        $result = calcul($a, $operation, $b);
-        echo 'Le résultat de l\'opération est ' .$result;
+        if (isset($_GET["a"]) && isset($_GET["b"]) && isset($_GET["operation"])) {
+            $a = $_GET["a"];
+            $b = $_GET["b"];
+            $operation = $_GET["operation"];
+            echo "$a $operation $b";
+        }
     ?>
-
 </body>
 </html>

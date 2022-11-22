@@ -1,7 +1,7 @@
 <!-- Partie PHP -->
 <?php
-    $str = "Bonjour";
-    $char = "o";
+    // $str = "Bonjour";
+    // $char = "o";
 
     function occurences($str, $char){
         $count = 0;
@@ -29,10 +29,27 @@
     <h1>jour 7 job05</h1>
     <br>
     <br>
+    <form action="" method="get">
+        <input type="text" name="str" placeholder="entrez une phrase">
+        <br>
+        <input type="text" name="char" placeholder="entrez un charactère">
+        <input type="submit" value="chercher">
+    </form>
     <?php
-        echo "La phrase est $str <br>";
-        echo "Le charactère recherché est $char <br>";
-        echo "Le nombre d'occurences de cette lettre est " . occurences($str, $char);
+        if (isset($_GET["str"]) && isset($_GET["char"])) {
+            $str = $_GET["str"];
+            $char = $_GET["char"];
+            for ($i=0; isset($char[$i]); $i++){
+            }
+            if ($i > 1) {
+                echo "Vous ne pouvez entrer qu'un seul charactère";
+            }
+            else {
+                echo $str;
+                echo "<br>";
+                echo "Le charactère '" . $char . "' apparait " . occurences($str, $char) . " fois";
+            }
+        }
     ?>
 
 </body>
