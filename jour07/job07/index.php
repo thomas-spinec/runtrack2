@@ -6,7 +6,7 @@
     $min = "abcdefghijklmnopqrstuvwxyz";
     $dic = [$min,$maj];
 
-    function gras($str){
+    function gras($str){ //met les mots commençant par une majuscule en gras
         $maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $mot ="";
         $j=0;
@@ -51,7 +51,7 @@
         }
     }
 
-    function cesar($str, $decalage){
+    function cesar($str, $decalage){ // encodage via le chiffre de césar (décaler les lettre dans l'alphabet)
         $maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $min = "abcdefghijklmnopqrstuvwxyz";
         $dic = [
@@ -64,7 +64,7 @@
                 if ($casse == "minuscule") {
                     for ($j=0; isset($letter[$j]); $j++) {
                         if ($str[$i] == $letter[$j]) {
-                            $str[$i] = $letter[($j+$decalage)%26];
+                            $str[$i] = $letter[($j+$decalage)%26]; //le modulo permet de rester dans l'interval 0-26 (l'alphabet)
                             break;
                         }
                     }
@@ -80,6 +80,52 @@
             }
         }
         return $str;
+    }
+
+    function plateforme($str){ // rajout de "_" à la fin des mot se terminant par "me"
+        $mot ="";
+        $j=0;
+        echo $str;
+        echo "<br>";
+        for ($i=0; isset($str[$i]); $i++) {
+            if ($str[$i] === " ") {
+                $mot[$j] = $str[$i];
+                for ($k=0; isset($mot[$k]); $k++) {
+
+                }
+                if ($mot[$k-3] == "m" && $mot[$k-2] == "e") { //vérification des dernière lettre du mot (il y a l'espace)
+                    $mot[$k-1] = "_";
+                    $mot[$k] = " ";
+                    echo $mot;
+                    $mot = "";
+                    $j=0;
+                }
+                else {
+                    echo $mot;
+                    $mot = "";
+                    $j=0;
+                }
+            }
+            else {
+                $mot[$j] = $str[$i];
+                $j++;
+            }
+        }
+        for ($k=0; isset($mot[$k]); $k++) {
+
+        }
+        if ($mot[$k-2] == "m" && $mot[$k-1] == "e") {
+            $mot[$k-1] = "_";
+            $mot[$k] = " ";
+            echo $mot;
+            $mot = "";
+            $j=0;
+        }
+        else {
+            echo $mot;
+            $mot = "";
+            $j=0;
+        }
     }
 ?>
 
@@ -131,6 +177,7 @@
                 echo "Veuillez choisir une fonction";
             }
         }
+        
     ?>
 </body>
 </html>
