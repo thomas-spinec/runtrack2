@@ -1,5 +1,7 @@
 <!-- Partie PHP -->
 <?php
+    $decalage = 2;
+
     $maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $min = "abcdefghijklmnopqrstuvwxyz";
     $dic = [$min,$maj];
@@ -48,6 +50,37 @@
             }
         }
     }
+
+    function cesar($str, $decalage){
+        $maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $min = "abcdefghijklmnopqrstuvwxyz";
+        $dic = [
+            "minuscule" => $min,
+            "majuscule" => $maj];
+        echo $str;
+        echo "<br>";
+        for ($i=0; isset($str[$i]); $i++) {
+            foreach ($dic as $casse => $letter) {
+                if ($casse == "minuscule") {
+                    for ($j=0; isset($letter[$j]); $j++) {
+                        if ($str[$i] == $letter[$j]) {
+                            $str[$i] = $letter[($j+$decalage)%26];
+                            break;
+                        }
+                    }
+                }
+                else if ($casse == "majuscule") {
+                    for ($j=0; isset($letter[$j]); $j++) {
+                        if ($str[$i] == $letter[$j]) {
+                            $str[$i] = $letter[($j+$decalage)%26];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return $str;
+    }
 ?>
 
 <!-- Partie HTML -->
@@ -84,13 +117,12 @@
         if (isset($_GET["str"]) && isset($_GET["fonction"])) {
             $str = $_GET["str"];
             echo '<br>';
-            var_dump($str);
             $fonction = $_GET["fonction"];
             if ($fonction == "gras") {
                 gras($str);
             }
             else if ($fonction == "cesar") {
-                cesar($str);
+                echo cesar($str, $decalage);
             }
             else if ($fonction == "plateforme") {
                 plateforme($str);
