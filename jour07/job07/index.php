@@ -1,11 +1,5 @@
 <!-- Partie PHP -->
 <?php
-    $decalage = 2;
-
-    $maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $min = "abcdefghijklmnopqrstuvwxyz";
-    $dic = [$min,$maj];
-
     function gras($str){ //met les mots commençant par une majuscule en gras
         $maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $mot ="";
@@ -155,15 +149,28 @@
             <option value="plateforme">plateforme</option>
         </select>
         <br>
+        <label for="decalage">Dans le cas de la fonction "cesar" <br> choisissez un nombre entre 1 et 25 (par défaut 2):</label>
+        <select name="decalage">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <?php
+                for ($i=3; $i<=25; $i++) {
+                    echo "<option value=\"$i\">$i</option>";
+                }
+            ?>
+        </select>
+        <br>
         <br>
         <input type="submit" value="envoyer">
+        <br>
+        <br>
     </form>
 
     <?php
         if (isset($_GET["str"]) && isset($_GET["fonction"])) {
             $str = $_GET["str"];
-            echo '<br>';
             $fonction = $_GET["fonction"];
+            $decalage = $_GET["decalage"];
             if ($fonction == "gras") {
                 gras($str);
             }
