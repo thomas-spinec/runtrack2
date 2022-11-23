@@ -1,24 +1,27 @@
 <!-- Partie PHP -->
 <?php
 
-if (isset($joueur)){
-    $joueur = 'X';
+// Définition du joueur (X ou O) dans un cookie pour qu'il le garde en mémoire
+if (!isset($_COOKIE['joueur'])){
+    setcookie('joueur', 'X', time() + 365*24*3600);
+    $_COOKIE['joueur'] = 'X';
 }
 
+function jeu($case){
+    $symbole = $_COOKIE['joueur'];
+    setcookie("$case", $symbole, time() + 365*24*3600);
+    $_COOKIE[$case] = $symbole;
+    victoire();
+}
 
-function jeu($case, $joueur){
-
-    setcookie($case, $joueur, time() + 365*24*3600);
-    $_COOKIE[$case] = $joueur;
-    if ($joueur == 'X'){
-        $joueur = 'O';
+function chgmt_joueur(){
+    if ($_COOKIE['joueur'] == 'X'){
+        $_COOKIE['joueur'] = 'O';
     }
     else {
-        $joueur = 'X';
+        $_COOKIE['joueur'] = 'X';
     }
-
 }
-
 
 function victoire(){
     //lignes
@@ -60,17 +63,32 @@ function victoire(){
     //match nul
     $count = 0;
     for ($i=1; $i < 10; $i++) { 
-        if (!isset($_COOKIE['case' . $i])){
+        if (isset($_COOKIE['case' . $i])){
             $count++;
         }
     }
-    if ($count == 0){
+    if ($count == 9){
         return 2;
     }
     return 1;
 }
-
 // RESET //
+
+function reset_fun(){
+        for ($i = 1; $i < 10; $i++){
+        if (isset($_COOKIE['case' . $i])){
+            setcookie('case' . $i, '', time() - 3600);
+        $_COOKIE["case$i"] = null;
+        }
+        if (isset($_POST['case' . $i])){
+            $_POST["case$i"] == null;
+        }
+    }
+    for ($i = 0; $i <9; $i++){
+    }
+    $_COOKIE['joueur'] = 'X';
+}
+
 if (isset($_POST['reset'])){
     for ($i = 1; $i < 10; $i++){
         if (isset($_COOKIE['case' . $i])){
@@ -81,10 +99,10 @@ if (isset($_POST['reset'])){
             $_POST["case$i"] == null;
         }
     }
-    $_POST['jouer']= null;
-    $joueur ="X";
+    for ($i = 0; $i <9; $i++){
+    }
+    $_COOKIE['joueur'] = 'X';
 }
-
 
 ?>
 
@@ -102,181 +120,183 @@ if (isset($_POST['reset'])){
     <h2>jour 8 job05</h2>
     <br>
     <br>
-    <?php
-    // if (!isset($_POST['jouer'])){
-    //     echo "<form action='' method='post'>
-    //     <input type='submit' value='jouer' name= 'jouer'>
-    // </form>";
-    // }
-    // echo '<br>';
-    // echo '<br>';
-    ?>
-    <?php
-        // JEU //
-        $joueur= 'X';
-        while (victoire() == 1){
-            if (isset($_POST['reset'])){
-                break;
-            }
-            if (isset($_POST['case1'])){
-                jeu('case1', $joueur);
-            }
-            if (isset($_POST['case2'])){
-                jeu('case2', $joueur);
-            }
-            if (isset($_POST['case3'])){
-                jeu('case3', $joueur);
-            }
-            if (isset($_POST['case4'])){
-                jeu('case4', $joueur);
-            }
-            if (isset($_POST['case5'])){
-                jeu('case5', $joueur);
-            }
-            if (isset($_POST['case6'])){
-                jeu('case6', $joueur);
-            }
-            if (isset($_POST['case7'])){
-                jeu('case7', $joueur);
-            }
-            if (isset($_POST['case8'])){
-                jeu('case8', $joueur);
-            }
-            if (isset($_POST['case9'])){
-                jeu('case9', $joueur);
-            }
+    <?php  // JEU //
+        if (isset($_POST['case1'])){
+            $case1 = 'case1';
+            jeu($case1);
         }
-
+        if (isset($_POST['case2'])){
+            $case2 = 'case2';
+            jeu($case2);
+        }
+        if (isset($_POST['case3'])){
+            $case3 = 'case3';
+            jeu($case3);
+        }
+        if (isset($_POST['case4'])){
+            $case4 = 'case4';
+            jeu($case4 );
+        }
+        if (isset($_POST['case5'])){
+            $case5 = 'case5';
+            jeu($case5 );
+        }
+        if (isset($_POST['case6'])){
+            $case6 = 'case6';
+            jeu($case6 );
+        }
+        if (isset($_POST['case7'])){
+            $case7 = 'case7';
+            jeu($case7 );
+        }
+        if (isset($_POST['case8'])){
+            $case8 = 'case8';
+            jeu($case8 );
+        }
+        if (isset($_POST['case9'])){
+            $case9 = 'case9';
+            jeu($case9 );
+        }
+        // FIN JEU //
+    ?>
+    <?php // Verification victoire //
         if (victoire() == 0){
-            echo "Victoire du joueur $joueur";
+            echo 'Victoire du joueur ' . $_COOKIE['joueur'];
+            echo sleep(1);
+            reset_fun();
         }
         else if (victoire() == 2){
-            echo "Match nul! cliquez sur le bouton reset";
+            echo "Match nul!";
+            echo sleep(1);
+            reset_fun();
         }
     ?>
-    <!-- jeu -->
+    <br>
+    <br>
+    <!-- Tableau -->
     <table border : solid>
         <tr> <!-- 1ère ligne -->
             <td>
-                <form action="" method="post">
                     <?php
-                        if (isset($_POST['case1'])) {
-                            echo $joueur;
-                            $case1 = $_POST['case1'];
+                        if (isset($_COOKIE['case1'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
                         }
                         else {
-                            echo "<input type='submit' value='-' name='case1'>";
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case1'>
+                            </form>";
                         }
                     ?>
-                </form>
+                
             </td>
             <td>
-                <form action="" method="post">
                     <?php
-                        if (isset($_POST['case2'])) {
-                            echo $joueur;
-                            $case2 = $_POST['case2'];
+                        if (isset($_COOKIE['case2'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
                         }
                         else {
-                            echo "<input type='submit' value='-' name='case2'>";
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case2'>
+                            </form>";
                         }
                     ?>
-                </form>
             </td>
             <td>
-                <form action="" method="post">
                     <?php
-                        if (isset($_POST['case3'])) {
-                            echo $joueur;
-                            $case3 = $_POST['case3'];
+                        if (isset($_COOKIE['case3'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
                         }
                         else {
-                            echo "<input type='submit' value='-' name='case3'>";
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case3'>
+                            </form>";
                         }
                     ?>
-                </form>
-            </td>
-        </tr>
-        <tr> <!-- 2ère ligne -->
-            <td>
-                <form action="" method="post">
-                    <?php
-                        if (isset($_POST['case4'])) {
-                            echo $joueur;
-                            $case4 = $_POST['case4'];
-                        }
-                        else {
-                            echo "<input type='submit' value='-' name='case4'>";
-                        }
-                    ?>
-                </form>
-            </td>
-            <td>
-                <form action="" method="post">
-                    <?php
-                        if (isset($_POST['case5'])) {
-                            echo $joueur;
-                            $case5 = $_POST['case5'];
-                        }
-                        else {
-                            echo "<input type='submit' value='-' name='case5'>";
-                        }
-                    ?>
-                </form>
-            </td>
-            <td>
-                <form action="" method="post">
-                    <?php
-                        if (isset($_POST['case6'])) {
-                            echo $joueur;
-                            $case6 = $_POST['case6'];
-                        }
-                        else {
-                            echo "<input type='submit' value='-' name='case6'>";
-                        }
-                    ?>
-                </form>
             </td>
         </tr>
-        <tr> <!-- 3ère ligne -->
+        <tr> <!-- 2ème ligne -->
             <td>
-                <form action="" method="post">
                     <?php
-                        if (isset($_POST['case7'])) {
-                            echo $joueur;
-                            $case7 = $_POST['case7'];
+                        if (isset($_COOKIE['case4'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
                         }
                         else {
-                            echo "<input type='submit' value='-' name='case7'>";
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case4'>
+                            </form>";
                         }
                     ?>
-                </form>
             </td>
             <td>
-                <form action="" method="post">
                     <?php
-                        if (isset($_POST['case8'])) {
-                            echo $joueur;
-                            $case8 = $_POST['case8'];
+                        if (isset($_COOKIE['case5'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
                         }
                         else {
-                            echo "<input type='submit' value='-' name='case8'>";
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case5'>
+                            </form>";
                         }
                     ?>
-                </form>
             </td>
             <td>
-                <form action="" method="post">
                     <?php
-                        if (isset($_POST['case9'])) {
-                            echo $joueur;
-                            $case9 = $_POST['case9'];
+                        if (isset($_COOKIE['case6'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
                         }
                         else {
-                            echo "<input type='submit' value='-' name='case9'>";
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case6'>
+                            </form>";
                         }
                     ?>
-                </form>
+            </td>
+        </tr>
+        <tr> <!-- 3ème ligne -->
+            <td>
+                    <?php
+                        if (isset($_COOKIE['case7'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
+                        }
+                        else {
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case7'>
+                            </form>";
+                        }
+                    ?>
+            </td>
+            <td>
+                    <?php
+                        if (isset($_COOKIE['case8'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
+                        }
+                        else {
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case8'>
+                            </form>";
+                        }
+                    ?>
+            </td>
+            <td>
+                    <?php
+                        if (isset($_COOKIE['case9'])){
+                            echo $_COOKIE['joueur'];
+                            chgmt_joueur();
+                        }
+                        else {
+                            echo "<form action='' method='post'>
+                            <input type='submit' value='-' name='case9'>
+                            </form>";
+                        }
+                    ?>
             </td>
         </tr>
     </table>
@@ -285,6 +305,17 @@ if (isset($_POST['reset'])){
     <form action="" method="post">
         <input type="submit" value="reset" name="reset">
     </form>
+    <br>
+    <br>
+    <?php
+        echo 'Au tour du joueur '. $_COOKIE['joueur'];
+        echo '<br>';
+    ?>
+    <?php
+        var_dump($_COOKIE);
+        echo '<br>';
+    ?>
+
 
 </body>
 </html>
