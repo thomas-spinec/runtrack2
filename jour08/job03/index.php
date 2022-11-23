@@ -70,7 +70,7 @@
     </form>
 
     <?php
-    //reset de cookie
+    //reset
     if (isset($_POST['reset'])) {
         unset($_SESSION['prenom']);
     }
