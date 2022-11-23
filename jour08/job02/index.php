@@ -3,9 +3,9 @@
 
     //incrémentation cookie
     if (isset($_COOKIE['nbvisites'])) {
-        $int = intval($_COOKIE['nbvisites']);
-        $int++;
-        setcookie('nbvisites', $int, time() + 365*24*3600);
+
+        setcookie('nbvisites', $_COOKIE['nbvisites'] + 1, time() + 365*24*3600); //dure 1 an
+
     }
     else {
         setcookie('nbvisites', '1', time() + 365*24*3600);
@@ -37,11 +37,15 @@
     <?php
     //reset de cookie
     if (isset($_POST['reset'])) {
-        // setcookie('nbvisites', '1', time() -3600);
-        $int = 1;
-        setcookie('nbvisites', $int, time() + 365*24*3600);
+        setcookie('nbvisites', '1', time() -3600);
+        setcookie('nbvisites', '1', time() + 365*24*3600);
+        $_COOKIE['nbvisites'] = 1;
     }
-        echo 'La page a été visité <b>' . $_COOKIE['nbvisites'] . '</b> fois';
+
+    ?>
+
+    <?php
+    echo 'La page a été visité <b>' . $_COOKIE['nbvisites'] . '</b> fois';
     ?>
 </body>
 </html>
