@@ -1,108 +1,121 @@
 <!-- Partie PHP -->
 <?php
+    session_start();
 
-// Définition du joueur (X ou O) dans un cookie pour qu'il le garde en mémoire
-if (!isset($_COOKIE['joueur'])){
-    setcookie('joueur', 'X', time() + 365*24*3600);
-    $_COOKIE['joueur'] = 'X';
-}
-
-function jeu($case){
-    $symbole = $_COOKIE['joueur'];
-    setcookie("$case", $symbole, time() + 365*24*3600);
-    $_COOKIE[$case] = $symbole;
-    victoire();
-}
-
-function chgmt_joueur(){
-    if ($_COOKIE['joueur'] == 'X'){
-        $_COOKIE['joueur'] = 'O';
+    if (!isset($_SESSION['tour'])){
+        $_SESSION['tour'] = 1;
     }
-    else {
-        $_COOKIE['joueur'] = 'X';
+
+    // Définition du joueur (X ou O) dans une variable session pour qu'il le garde en mémoire
+    if (!isset($_SESSION['joueur'])){
+        $_SESSION['joueur'] = 'X';
     }
-}
 
-function victoire(){
-    //lignes
-
-    if (isset($_COOKIE['case1']) && isset($_COOKIE['case2']) && isset($_COOKIE['case3'])){
-        if ($_COOKIE['case1'] == $_COOKIE['case2'] && $_COOKIE['case2'] == $_COOKIE['case3']){
-            return 0;
+    function jeu($case){
+        if ($_SESSION['tour'] % 2 != 0){
+            $_SESSION[$case] = 'X';
+        }
+        else {
+            $_SESSION[$case] = 'O';
         }
     }
-    if (isset($_COOKIE['case4']) && isset($_COOKIE['case5']) && isset($_COOKIE['case6'])){
-        if ($_COOKIE['case4'] == $_COOKIE['case5'] && $_COOKIE['case5'] == $_COOKIE['case6']){
-            return 0;
+
+    function chgmt_joueur(){
+        if ($_SESSION['tour'] % 2 == 0){
+            $_SESSION['joueur'] = 'O';
+        }
+        else {
+            $_SESSION['joueur'] = 'X';
         }
     }
-    if (isset($_COOKIE['case7']) && isset($_COOKIE['case8']) && isset($_COOKIE['case9'])){
-        if ($_COOKIE['case7'] == $_COOKIE['case8'] && $_COOKIE['case8'] == $_COOKIE['case9']){
-            return 0;
-        }
-    }
-    //colonnes
-    for ($i=1; $i < 4; $i++) { 
-        if (isset($_COOKIE['case' . $i]) && isset($_COOKIE['case' . $i+3]) && isset($_COOKIE['case' . $i+6])){
-            if ($_COOKIE['case' . $i] == $_COOKIE['case' . $i+3] && $_COOKIE['case' . $i+3] == $_COOKIE['case' . $i+6]){
-                return 0;
+
+    function victoire(){
+        //lignes
+                                     // JE NE SAIS PAS POURQUOI çA NE FONCTIONNE PAS AVEC LA BOUCLE FOR //
+        // for ($i=1; $i < 8; $i +3){
+        //     if (isset($_SESSION['case' . $i]) && isset($_SESSION['case' . $i+1]) && isset($_SESSION['case' . $i+2])){
+        //         if ($_SESSION['case' . $i] == $_SESSION['case' . $i+1] && $_SESSION['case' . $i] == $_SESSION['case' . $i+2]){
+        //             return 'gagné';
+        //         }
+        //     }
+        // }
+        if (isset($_SESSION['case1']) && isset($_SESSION['case2']) && isset($_SESSION['case3'])){
+            if ($_SESSION['case1'] == $_SESSION['case2'] && $_SESSION['case2'] == $_SESSION['case3']){
+                return 'gagné';
             }
         }
-    }
-    //diagonales
-    if (isset($_COOKIE['case1']) && isset($_COOKIE['case5']) && isset($_COOKIE['case9'])){
-        if ($_COOKIE['case1'] == $_COOKIE['case5'] && $_COOKIE['case5'] == $_COOKIE['case9']){
-            return 0;
+        if (isset($_SESSION['case4']) && isset($_SESSION['case5']) && isset($_SESSION['case6'])){
+            if ($_SESSION['case4'] == $_SESSION['case5'] && $_SESSION['case5'] == $_SESSION['case6']){
+                return 'gagné';
+            }
         }
-    }
-    if (isset($_COOKIE['case3']) && isset($_COOKIE['case5']) && isset($_COOKIE['case7'])){
-        if ($_COOKIE['case3'] == $_COOKIE['case5'] && $_COOKIE['case5'] == $_COOKIE['case7']){
-            return 0;
+        if (isset($_SESSION['case7']) && isset($_SESSION['case8']) && isset($_SESSION['case9'])){
+            if ($_SESSION['case7'] == $_SESSION['case8'] && $_SESSION['case8'] == $_SESSION['case9']){
+                return 'gagné';
+            }
         }
-    }
-    //match nul
-    $count = 0;
-    for ($i=1; $i < 10; $i++) { 
-        if (isset($_COOKIE['case' . $i])){
-            $count++;
+        //colonnes
+        for ($i=1; $i < 4; $i++) { 
+            if (isset($_SESSION['case' . $i]) && isset($_SESSION['case' . $i+3]) && isset($_SESSION['case' . $i+6])){
+                if ($_SESSION['case' . $i] == $_SESSION['case' . $i+3] && $_SESSION['case' . $i+3] == $_SESSION['case' . $i+6]){
+                    return 'gagné';
+                }
+            }
         }
+        //diagonales
+        if (isset($_SESSION['case1']) && isset($_SESSION['case5']) && isset($_SESSION['case9'])){
+            if ($_SESSION['case1'] == $_SESSION['case5'] && $_SESSION['case5'] == $_SESSION['case9']){
+                return 'gagné';
+            }
+        }
+        if (isset($_SESSION['case3']) && isset($_SESSION['case5']) && isset($_SESSION['case7'])){
+            if ($_SESSION['case3'] == $_SESSION['case5'] && $_SESSION['case5'] == $_SESSION['case7']){
+                return 'gagné';
+            }
+        }
+        //match nul
+        $count = 0;
+        for ($i=1; $i < 10; $i++) { 
+            if (isset($_SESSION['case' . $i])){
+                $count++;
+            }
+        }
+        if ($count == 9){
+            return 'match nul';
+        }
+        return 1;
     }
-    if ($count == 9){
-        return 2;
-    }
-    return 1;
-}
-// RESET //
+    // RESET //
 
-function reset_fun(){
+    function reset_fun(){
         for ($i = 1; $i < 10; $i++){
-        if (isset($_COOKIE['case' . $i])){
-            setcookie('case' . $i, '', time() - 3600);
-        $_COOKIE["case$i"] = null;
+            if (isset($_SESSION['case' . $i])){
+                $_SESSION["case$i"] = null;
+            }
+            if (isset($_POST['case' . $i])){
+                $_POST["case$i"] == null;
+            }
         }
-        if (isset($_POST['case' . $i])){
-            $_POST["case$i"] == null;
+        for ($i = 0; $i <9; $i++){
         }
+        $_SESSION['joueur'] = 'X';
+        $_SESSION['tour'] = 0;
     }
-    for ($i = 0; $i <9; $i++){
-    }
-    $_COOKIE['joueur'] = 'X';
-}
 
-if (isset($_POST['reset'])){
-    for ($i = 1; $i < 10; $i++){
-        if (isset($_COOKIE['case' . $i])){
-            setcookie('case' . $i, '', time() - 3600);
-        $_COOKIE["case$i"] = null;
+    if (isset($_POST['reset'])){
+        for ($i = 1; $i < 10; $i++){
+            if (isset($_SESSION['case' . $i])){
+                $_SESSION["case$i"] = null;
+            }
+            if (isset($_POST['case' . $i])){
+                $_POST["case$i"] == null;
+            }
         }
-        if (isset($_POST['case' . $i])){
-            $_POST["case$i"] == null;
+        for ($i = 0; $i <9; $i++){
         }
+        $_SESSION['joueur'] = 'X';
+        $_SESSION['tour'] = 0;
     }
-    for ($i = 0; $i <9; $i++){
-    }
-    $_COOKIE['joueur'] = 'X';
-}
 
 ?>
 
@@ -159,18 +172,6 @@ if (isset($_POST['reset'])){
         }
         // FIN JEU //
     ?>
-    <?php // Verification victoire //
-        if (victoire() == 0){
-            echo 'Victoire du joueur ' . $_COOKIE['joueur'];
-            echo sleep(1);
-            reset_fun();
-        }
-        else if (victoire() == 2){
-            echo "Match nul!";
-            echo sleep(1);
-            reset_fun();
-        }
-    ?>
     <br>
     <br>
     <!-- Tableau -->
@@ -178,9 +179,9 @@ if (isset($_POST['reset'])){
         <tr> <!-- 1ère ligne -->
             <td>
                     <?php
-                        if (isset($_COOKIE['case1'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case1'])){
+                            echo $_SESSION['case1'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -188,13 +189,12 @@ if (isset($_POST['reset'])){
                             </form>";
                         }
                     ?>
-                
             </td>
             <td>
                     <?php
-                        if (isset($_COOKIE['case2'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case2'])){
+                            echo $_SESSION['case2'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -205,9 +205,9 @@ if (isset($_POST['reset'])){
             </td>
             <td>
                     <?php
-                        if (isset($_COOKIE['case3'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case3'])){
+                            echo $_SESSION['case3'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -220,9 +220,9 @@ if (isset($_POST['reset'])){
         <tr> <!-- 2ème ligne -->
             <td>
                     <?php
-                        if (isset($_COOKIE['case4'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case4'])){
+                            echo $_SESSION['case4'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -233,9 +233,9 @@ if (isset($_POST['reset'])){
             </td>
             <td>
                     <?php
-                        if (isset($_COOKIE['case5'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case5'])){
+                            echo $_SESSION['case5'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -246,9 +246,9 @@ if (isset($_POST['reset'])){
             </td>
             <td>
                     <?php
-                        if (isset($_COOKIE['case6'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case6'])){
+                            echo $_SESSION['case6'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -261,9 +261,9 @@ if (isset($_POST['reset'])){
         <tr> <!-- 3ème ligne -->
             <td>
                     <?php
-                        if (isset($_COOKIE['case7'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case7'])){
+                            echo $_SESSION['case7'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -274,9 +274,9 @@ if (isset($_POST['reset'])){
             </td>
             <td>
                     <?php
-                        if (isset($_COOKIE['case8'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case8'])){
+                            echo $_SESSION['case8'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -287,9 +287,9 @@ if (isset($_POST['reset'])){
             </td>
             <td>
                     <?php
-                        if (isset($_COOKIE['case9'])){
-                            echo $_COOKIE['joueur'];
-                            chgmt_joueur();
+                        if (isset($_SESSION['case9'])){
+                            echo $_SESSION['case9'];
+                            victoire();
                         }
                         else {
                             echo "<form action='' method='post'>
@@ -307,15 +307,27 @@ if (isset($_POST['reset'])){
     </form>
     <br>
     <br>
-    <?php
-        echo 'Au tour du joueur '. $_COOKIE['joueur'];
-        echo '<br>';
+    <?php // Verification victoire //
+        if (victoire() == 'gagné'){
+            echo '<br>';
+            echo 'Victoire du joueur ' . $_SESSION['joueur'];
+            reset_fun();
+            echo '<br>';
+        }
+        else if (victoire() == 'match nul'){
+            echo '<br>';
+            echo "Match nul!";
+            reset_fun();
+            echo '<br>';
+        }
+        else{
+            $_SESSION['tour']++;
+            chgmt_joueur();
+            echo 'Au tour du joueur '. $_SESSION['joueur'];
+            echo '<br>';
+            echo 'tour : ' . $_SESSION['tour'];
+        }
     ?>
-    <?php
-        var_dump($_COOKIE);
-        echo '<br>';
-    ?>
-
 
 </body>
 </html>
