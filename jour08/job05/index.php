@@ -96,8 +96,6 @@
                 $_POST["case$i"] == null;
             }
         }
-        for ($i = 0; $i <9; $i++){
-        }
         $_SESSION['joueur'] = 'X';
         $_SESSION['tour'] = 0;
     }
@@ -110,8 +108,6 @@
             if (isset($_POST['case' . $i])){
                 $_POST["case$i"] == null;
             }
-        }
-        for ($i = 0; $i <9; $i++){
         }
         $_SESSION['joueur'] = 'X';
         $_SESSION['tour'] = 0;
